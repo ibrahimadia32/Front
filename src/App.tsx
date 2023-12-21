@@ -1,7 +1,7 @@
 import React from 'react';
 // import Home from './views/Home';
 // import Cardcomponent from './components/Card.component';
-import Profil from './components/Profil'
+import Profil from './views/Profil'
 function App() {
   return (
 

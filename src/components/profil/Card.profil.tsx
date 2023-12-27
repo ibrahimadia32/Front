@@ -2,14 +2,6 @@ import * as React from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography, Grid} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-// const bull = (
-//     <Box
-//       component="span"
-//       sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-//     >
-//       •
-//     </Box>
-//   );
 
   const SingleCard = () => (
     <Card variant="outlined" sx={{ width: 300, margin: 2 }}>

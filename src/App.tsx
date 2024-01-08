@@ -1,8 +1,8 @@
 import React from 'react';
 // import Home from './views/Home';
 // import Cardcomponent from './components/Card.component:';
-import Profil1 from './views/Profil1'
-import Edit from './views/Edit';
+// import Profil from './views/Profil'
+import Add from './views/Add';
 // import Connexion from './views/Page.connexion'
 // import Inscription from './views/Page.inscription'
 
@@ -10,7 +10,7 @@ import Edit from './views/Edit';
 function App() {
   return (
 
-      <Edit />
+      <Add />
   );
 }
 

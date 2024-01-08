@@ -1,5 +1,8 @@
-import React from 'react';
-import { Typography, Paper, Avatar, Grid, Divider } from '@mui/material';
+import React from "react";
+import { Typography, Paper, Avatar, Grid, Divider } from "@mui/material";
+import StarIcon from '@mui/icons-material/Star';
+import StarHalfIcon from '@mui/icons-material/StarHalf';
+import { Box, FormControl, OutlinedInput, FormHelperText, Button, TextField } from '@mui/material';
 
 const styles = {
   paper: {
@@ -12,70 +15,164 @@ const styles = {
   },
   section: {
     marginTop: 20,
+    
   },
 };
 
 const ProfilePage = () => {
-  const developerInfo = {
-    name: 'John Doe',
-    jobTitle: 'Développeur Full Stack',
-    location: 'Ville fictive',
-    bio: 'Passionné par le développement web et les nouvelles technologies.',
-    avatarUrl: 'lien-vers-une-image.jpg',
-    experience: [
-      {
-        company: 'ABC Inc.',
-        position: 'Développeur Web',
-        duration: 'Janvier 2020 - Présent',
-      },
-      {
-        company: 'XYZ Corp.',
-        position: 'Stagiaire en Développement',
-        duration: 'Juin 2019 - Décembre 2019',
-      },
+    const developerInfo = {
+        name: "John Doe",
+        jobTitle: "Développeur Full Stack",
+        location: "Ville fictive",
+        bio: "Passionné par le développement web et les nouvelles technologies.",
+        avatarUrl: "lien-vers-une-image.jpg",
+        phone: "06 12 34 56 78",
+        email: "email@gmail.com",
+        address: "1 rue de la Paix, 75000 Paris",
+        birthday: "01/01/2000",
+        github:"www.github.com",
+        linkedin:"www.linkedin.com",
+
+        experience: [
+        {
+            company: "ABC Inc.",
+            position: "Développeur Web",
+            duration: "Janvier 2020 - Présent",
+        },
+        {
+            company: "XYZ Corp.",
+            position: "Stagiaire en Développement",
+            duration: "Juin 2019 - Décembre 2019",
+        },
     ],
-  };
-
-  return (
-    <Grid container justifyContent="center" style={{ height: '100vh', alignItems: 'center' }}>
-      <Grid item xs={12} sm={8} md={6}>
-        <Paper style={styles.paper} elevation={3}>
-          <Grid container justifyContent="center" spacing={2}>
-            <Grid item>
-              <Avatar alt={developerInfo.name} src={developerInfo.avatarUrl} style={styles.avatar} />
+        formation: [
+            {
+                school: "Ecole 1",
+                degree: "Diplôme 1",
+                duration: "2018 - 2020",
+            },
+            {
+                school: "Ecole 2",
+                degree: "Diplôme 2",
+                duration: "2016 - 2018",
+            },
+        
+        ],
+    };
+    
+    return (
+        <div
+        style={{ width: "100%", height: "50vh", justifyContent: "left", alignItems: "center" , backgroundColor: "#F5F5F5"}}
+        >
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Grid container justifyContent="center" spacing={2}>
+                <Grid item>
+                <Avatar
+                    alt={developerInfo.name}
+                    src={developerInfo.avatarUrl}
+                    style={styles.avatar}
+                />
+                </Grid>
+            
+                <Grid item>
+                <div style={{
+                              display: 'flex',
+                              flexDirection: 'row',
+                              
+                                }}>
+                        <div><StarIcon /></div>
+                        <div><StarIcon /></div>
+                        <div><StarIcon /></div>
+                        <div><StarIcon /></div>
+                        <div><StarHalfIcon /></div>
+                    </div>
+                <Typography variant="h2">{developerInfo.name}</Typography>
+                <Typography variant="h5">
+                    {developerInfo.jobTitle}
+                </Typography>
+                <Typography variant="h6">
+                    {developerInfo.location}
+                </Typography>
+                </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="h4">{developerInfo.name}</Typography>
-              <Typography variant="subtitle1">{developerInfo.jobTitle}</Typography>
-              <Typography variant="subtitle1">{developerInfo.location}</Typography>
-            </Grid>
-          </Grid>
 
-          <Divider style={styles.section} />
+            </Paper>
+        </Grid>
+        
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Bio</Typography>
+            <Typography variant="body1">{developerInfo.bio}</Typography>
+            </Paper>
+        </Grid>
 
-          <Typography variant="body1" style={styles.section}>
-            {developerInfo.bio}
-          </Typography>
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Expérience</Typography>
+            {developerInfo.experience.map((item) => (
+                <Box style={styles.section}>
+                <Typography variant="h6">{item.company}</Typography>
+                <Typography variant="subtitle1">{item.position}</Typography>
+                <Typography variant="subtitle2">{item.duration}</Typography>
+                </Box>
+            ))}
+            </Paper>
+        </Grid>
 
-          <Divider style={styles.section} />
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Formation</Typography>
+            {developerInfo.formation.map((item) => (
+                <Box style={styles.section}>
+                <Typography variant="h6">{item.school}</Typography>
+                <Typography variant="subtitle1">{item.degree}</Typography>
+                <Typography variant="subtitle2">{item.duration}</Typography>
+                </Box>
+            ))}
+            </Paper>
+        </Grid>
 
-          <Typography variant="h5" style={styles.section}>
-            Expérience Professionnelle
-          </Typography>
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Compétences</Typography>
+            <Typography variant="body1">Compétence 1</Typography>
+            <Typography variant="body1">Compétence 2</Typography>
+            <Typography variant="body1">Compétence 3</Typography>
+            <Typography variant="body1">Compétence 4</Typography>
+            </Paper>
+        </Grid>
 
-          {developerInfo.experience.map((exp, index) => (
-            <div key={index}>
-              <Typography variant="subtitle1">{exp.position}</Typography>
-              <Typography variant="subtitle2" color="textSecondary">
-                {exp.company} | {exp.duration}
-              </Typography>
-              {index < developerInfo.experience.length - 1 && <Divider style={styles.section} />}
-            </div>
-          ))}
-        </Paper>
-      </Grid>
-    </Grid>
-  );
-};
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Langues</Typography>
+            <Typography variant="body1">Langue 1</Typography>
+            <Typography variant="body1">Langue 2</Typography>
+            <Typography variant="body1">Langue 3</Typography>
+            </Paper>
+        </Grid>
 
-export default ProfilePage;
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Centres d'intérêt</Typography>
+            <Typography variant="body1">Centres d'intérêt 1</Typography>
+            <Typography variant="body1">Centres d'intérêt 2</Typography>
+            <Typography variant="body1">Centres d'intérêt 3</Typography>
+            </Paper>
+        </Grid>
+        
+        <Grid item xs={8} sm={2} md={4} >
+            <Paper style={styles.paper}>
+            <Typography variant="h6">Contact</Typography>
+            <Typography variant="body1">Téléphone : {developerInfo.phone}</Typography>
+            <Typography variant="body1">Email : {developerInfo.email}</Typography>
+            <Typography variant="body1">Adresse : {developerInfo.address}</Typography>
+            </Paper>
+        </Grid>
+        </div>
+    );
+}
+
+export default  ProfilePage;
+
+

@@ -1,4 +1,4 @@
-interface Person {
+export interface Person {
     name: string;
     jobTitle: string;
     location: string;
@@ -22,7 +22,7 @@ interface Person {
     }[];
 };
 
-const person1: Person = {
+export const person1: Person = {
     name: "John Doe",
     jobTitle: "Full Stack Developer",
     location: "Paris",

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, FormControl, OutlinedInput, FormHelperText, Button } from '@mui/material';
 
 const Connexion = () => {

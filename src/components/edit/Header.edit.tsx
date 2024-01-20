@@ -31,8 +31,8 @@ const headerElements : HeaderElement[] = [
     
     },
     {
-        name: 'Location',
-        key: 'location',
+        name: 'job',
+        key: 'job',
     
     },
     {

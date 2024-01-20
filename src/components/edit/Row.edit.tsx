@@ -1,6 +1,7 @@
 
 import { Create, Delete } from '@mui/icons-material';
 import {TableCell, Avatar, TableRow, IconButton, ButtonGroup} from '@mui/material';
+import { Person } from '../interface/Interface.Profil';
 
 
 interface RowElement {
@@ -10,50 +11,36 @@ interface RowElement {
     align?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined,
 }
 
-
-const RowEdit = ({
-    firstname = 'John',
-    lastname = 'Doe',
-    email = 'john@doe.fr',
-    phone = '06 06 06 06 06',
-    location = 'Paris',
-    avatar = 'https://material-ui.com/static/images/avatar/1.jpg',
-}: {
-    firstname?: string,
-    lastname?: string,
-    email?: string,
-    phone?: string,
-    location?: string,
-    avatar?: string,
-
+interface RowEditProps {
+    person : Person,
 }
 
-) => {
 
+const RowEdit = ({person}: RowEditProps) => {
     const rowElements : RowElement[] = [
         {
-            value: <Avatar src={avatar} />,
+            value: <Avatar src={person.avatarUrl} />,
             key: 'avatar',
         
         
         },
         {
-            value: `${firstname} ${lastname}`,
+            value: `${person.firstname} ${person.lastname}`,
             key: 'name',
         
         },
         {
-            value: email,
+            value: person.email,
             key: 'email',
         },
         {
-            value: phone,
+            value:person.phone,
             key: 'phone',
         
         },
         {
-            value: location,
-            key: 'location',
+            value: person.jobtitle,
+            key: 'job',
         
         },
         {

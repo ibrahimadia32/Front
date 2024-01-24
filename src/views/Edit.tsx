@@ -4,6 +4,7 @@ import RowEdit from "../components/edit/Row.edit";
 import { useEffect, useState } from "react";
 import Requestapi from "../services/Requestapi";
 import {Person } from "../components/interface/Interface.Profil";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 const Edit = () => {
     const [person, setPerson] = useState<Person[]>([]);
@@ -16,8 +17,22 @@ const Edit = () => {
     });
 
     return (
+        
         <Table component={Paper}>
             <TableHead>
+            <PersonAddIcon
+      style={{
+        fontSize: '25px',
+        position: 'absolute',
+        top: '15px',
+        right: '15px',
+        cursor: 'pointer',
+      }}
+       onClick={() => {
+        console.log('click');
+       }
+         }
+    />
                 <HeaderEdit />
             </TableHead>
             <TableBody>

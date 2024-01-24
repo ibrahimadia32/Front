@@ -1,7 +1,113 @@
 import React from 'react';
 import { Box, FormControl, OutlinedInput, FormHelperText, Button, TextField } from '@mui/material';
+import { useEffect } from 'react';
+import Requestapi from '../services/Requestapi';
 
-const Connexion = () => {
+interface inscriptionInput { 
+  label : string;
+  grid?: boolean;
+  placeholder : string;
+  type : string;
+  value : any;
+  onChange : any;
+  required : boolean;
+}
+
+interface inscriptionForm {
+  prenom : string;
+  nom : string;
+  email : string;
+  password : string;
+  passwordConfirmation : string;
+  telephone : string;
+  entreprise : string;
+}
+
+
+
+const Inscription = () => {
+  const [inscriptionForm, setInscriptionForm] = React.useState<inscriptionForm>({
+    prenom : "",
+    nom : "",
+    email : "",
+    password : "",
+    passwordConfirmation : "",
+    telephone : "",
+    entreprise : "",
+  });
+
+  const sendRequest = async () => {
+    Requestapi.signin(inscriptionForm.prenom, inscriptionForm.nom, inscriptionForm.email, inscriptionForm.password, inscriptionForm.telephone, inscriptionForm.entreprise);
+  };
+  const inscriptionInputs : inscriptionInput[] = [
+    {
+      label : "Prénom",
+      placeholder : "Prénom",
+      grid : true,
+      type : "text",
+      value : inscriptionForm.prenom,
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, prenom : e.target.value}),
+      required : true,
+    },
+    {
+      label : "Nom",
+      placeholder : "Nom",
+      grid : true,
+      type : "text",
+      value : inscriptionForm.nom,
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, nom : e.target.value}),
+      required : true,
+    },
+    {
+      label : "Email",
+      placeholder : "Email",
+      grid : true,
+      type : "email",
+      value : inscriptionForm.email,
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, email : e.target.value}),
+      required : true,
+    },
+    {
+      label : "Mot de passe",
+      placeholder : "Mot de passe",
+      grid : true,
+      type : "password",
+      value : inscriptionForm.password,
+    
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, password : e.target.value}),
+      required : true,
+    },
+    {
+      label : "Confirmation du mot de passe",
+      placeholder : "Confirmation du mot de passe",
+      grid : true,
+      type : "password",
+      value : inscriptionForm.passwordConfirmation,
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, passwordConfirmation : e.target.value}),
+      required : true,
+    },
+    
+    {
+      label : "Téléphone",
+      placeholder : "Téléphone",
+      grid : true,
+      type : "number",
+      value : inscriptionForm.telephone,
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, telephone : e.target.value}),
+      required : true,
+    },
+    {
+      label : "Entreprise",
+      placeholder : "Entreprise",
+      grid : true,
+      type : "text",
+      value : inscriptionForm.entreprise,
+      onChange : (e : any) => setInscriptionForm({...inscriptionForm, entreprise : e.target.value}),
+      required : true,
+    },
+  ];
+
+
   return (
     <Box
       style={{
@@ -33,67 +139,32 @@ const Connexion = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <FormControl style={{ width: '25ch', marginBottom: 2, padding: 10 }}>
-              <OutlinedInput placeholder="Prénom" />
-            </FormControl>
 
-            <FormControl style={{ width: '25ch', marginBottom: 2, padding: 10 }}>
-              <OutlinedInput placeholder="Nom" />
-            </FormControl>
-          </div>
+          {
+            inscriptionInputs.map((input, index) => {
+              return (
+              <FormControl key={index} style={{ width: "50ch", marginBottom: 2, padding: 10 }}>
+                <TextField
+                  id="outlined-basic"
+                  label={input.label}
+                  variant="outlined"
+                  placeholder={input.placeholder}
+                  type={input.type}
+                  value={input.value}
+                  onChange={input.onChange}
+                  required={input.required}
+                />
+              </FormControl>
+              )
+            })
+          }
 
-          {/* Champ de date ajouté */}
-          <FormControl style={{ width: '52ch', marginBottom: 2, padding: 10 }}>
-            <TextField
-              id="date"
-              label="Date de naissance"
-              type="date"
-              defaultValue="2000-01-01"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-          </FormControl>
-
-          <FormControl style={{ width: '52ch', marginBottom: 2, padding: 10 }}>
-            <OutlinedInput placeholder="Adresse" />
-          </FormControl>
-
-          <div style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-            <FormControl style={{ width: '25ch', marginBottom: 2, padding: 10 }}>
-              <OutlinedInput placeholder="Code postal" />
-            </FormControl>
-
-            <FormControl style={{ width: '25ch', marginBottom: 2, padding: 10 }}>
-              <OutlinedInput placeholder="Ville" />
-            </FormControl>
-          </div>
-
-          <FormControl style={{ width: '52ch', marginBottom: 2, padding: 10 }}>
-            <OutlinedInput placeholder="Pays" />
-          </FormControl>
-
-          <FormControl style={{ width: '52ch', marginBottom: 2, padding: 10 }}>
-            <OutlinedInput placeholder="E-mail" />
-          </FormControl>
-
-          <FormControl style={{ width: '52ch', marginBottom: 2, padding: 10 }}>
-            <OutlinedInput placeholder="Numéro de téléphone" />
-          </FormControl>
+        
 
         </form>
-        <Button variant="contained" sx={
+        <Button variant="contained" 
+        type='submit'
+        sx={
           {
             backgroundColor: '#2E3B55',
             color: 'white',
@@ -104,11 +175,14 @@ const Connexion = () => {
             ":focus": {
               backgroundColor: '#2E3B55',
             },
+
           }
-        }>Inscription</Button>
+        }
+        onClick={sendRequest}
+        >Inscription</Button>
       </div>
     </Box>
   );
 };
 
-export default Connexion;
+export default Inscription;

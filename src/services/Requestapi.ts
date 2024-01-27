@@ -8,9 +8,7 @@ export default class Requestapi {
             headers: {
                 'Content-Type': 'application/json',
             },
-        
-        }
-        );
+        });
         return response;
         };
 
@@ -55,6 +53,15 @@ export default class Requestapi {
         );
         return response;
         }
+
+        static getalldomaine = async () => {
+            const response = await axios.get(`${url}/domaine`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response;
+        };
     }
     
 

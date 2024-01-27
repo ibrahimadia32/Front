@@ -1,19 +1,13 @@
-import React from 'react';
-// import Home from './views/Home';
-// import Cardcomponent from './components/Card.component:';
-// import Profil from './views/Profil'
-// import Edit from './views/Edit';
-// import Connexion from './views/Page.connexion'
-import Inscription from './views/Page.inscription'
-
-
-
-
+import Navbar from './components/routes/NavBar';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router/Router';
 function App() {
-  return (
-      <Inscription
-      />
-  );
+    return (
+        <BrowserRouter>
+            <Navbar />
+            <Router />
+        </BrowserRouter>
+    );
 }
 
 export default App;

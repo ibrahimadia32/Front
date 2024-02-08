@@ -1,11 +1,12 @@
 export interface Domaine {
     _id: string;
     name: string;
+    color?: string;
 }
 
 export interface Duration {
-    start: Date;
-    end: Date;
+    from: Date;
+    to: Date;
 }
 
 export interface Experience {

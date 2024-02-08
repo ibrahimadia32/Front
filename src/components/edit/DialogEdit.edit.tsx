@@ -14,9 +14,10 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { Domaine, Person } from '../interface/Interface.Profil';
+import { Domaine, Formation, Person } from '../interface/Interface.Profil';
 import Requestapi from '../../services/Requestapi';
 import { Domain } from '@mui/icons-material';
+import AddFormation from './dialog/AddFormation';
 
 interface Props {
     open: boolean;
@@ -103,6 +104,10 @@ const EditDailog = ({ open, handleClose, person }: Props) => {
         },
     ];
 
+    const handleFormations = (formations: Formation[]) => {
+        setPersonState({ ...person, formations: formations });
+    };
+
     return (
         <Dialog open={open} sx={{ '& .MuiDialog-paper': { width: '80%' } }} onClose={handleClose}>
             <DialogTitle>{'Edition :'}</DialogTitle>
@@ -121,7 +126,7 @@ const EditDailog = ({ open, handleClose, person }: Props) => {
                         </ListItem>
                     ))}
                     <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <Typography variant="h6">Skills :</Typography>
+                        <AddFormation defaultFormations={personState.formations} returnFormations={handleFormations} />
                     </ListItem>
                 </List>
             </DialogContent>
@@ -129,8 +134,7 @@ const EditDailog = ({ open, handleClose, person }: Props) => {
                 sx={{
                     display: 'flex',
                     justifyContent: 'space-center',
-                }}
-            >
+                }}>
                 <Button onClick={handleClose}>Annuler</Button>
                 <Button onClick={handleClose}>Enregistrer</Button>
             </DialogActions>

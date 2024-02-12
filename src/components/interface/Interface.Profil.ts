@@ -5,8 +5,8 @@ export interface Domaine {
 }
 
 export interface Duration {
-    from: Date;
-    to: Date;
+    from?: Date;
+    to?: Date;
 }
 
 export interface Experience {
@@ -37,3 +37,5 @@ export interface Person {
     formations: Formation[];
     domaines: Domaine[];
 }
+
+

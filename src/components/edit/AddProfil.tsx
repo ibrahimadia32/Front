@@ -200,7 +200,7 @@ const AddProfil = ({ open, handleClose }: Props) => {
             }}
             >
                 <Button onClick={handleClose}>Annuler</Button>
-                <Button onClick={handleClose}>Ajouter</Button>
+                <Button onClick={handleClose}>Ajouter </Button>
             </DialogActions>
         </Dialog>
             

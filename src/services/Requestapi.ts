@@ -53,12 +53,28 @@ export default class Requestapi {
         return response;
     };
 
-    static getalldomaine = async () => {
-        const response = await axios.get(`${url}/domaine`, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        return response;
-    };
-}
+        static getalldomaine = async () => {
+            const response = await axios.get(`${url}/domaine`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response;
+        };
+
+        static getprofil = async (id: string) => {
+            const response = await axios.get(`${url}/profil/${id}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response;
+        };
+
+        
+    }
+    
+
+
+
+

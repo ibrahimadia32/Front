@@ -3,7 +3,7 @@ import { TableCell, Avatar, TableRow, IconButton, ButtonGroup } from '@mui/mater
 import { Person } from '../interface/Interface.Profil';
 import { useState } from 'react';
 import EditDailog from './DialogEdit.edit';
-import ViewEdit from './VeiwEdit.edit';
+import ViewEdit from './ViewEdit.edit';
 
 interface RowElement {
     value: any;

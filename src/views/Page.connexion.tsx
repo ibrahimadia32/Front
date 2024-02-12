@@ -47,7 +47,7 @@ const Connexion = () => {
             backgroundColor: '#2E3B55',
             color: 'white',
             width: '25ch',
-            marginTop: '20px',  // Ajuster la marge supérieure ici
+            marginTop: '20px',
             marginBottom: '20px',
             margin: 'auto',
             ":focus": {

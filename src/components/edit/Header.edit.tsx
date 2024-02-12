@@ -53,7 +53,7 @@ const HeaderEdit = () => {
     return (
         <TableRow>
             {headerElements.map((elem, index) => (
-                <TableCell key={elem.key} align={elem.align}>
+                <TableCell key={index} align={elem.align}>
                     {elem.name}
                 </TableCell>
             ))}

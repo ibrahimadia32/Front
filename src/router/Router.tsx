@@ -16,8 +16,8 @@ const routes: RouteElement[] = [
 const Router = () => {
     return (
         <Routes>
-            {routes.map((route: RouteElement) => (
-                <Route path={route.path} element={route.component} />
+            {routes.map((route: RouteElement, index) => (
+                <Route path={route.path} element={route.component} key={index} />
             ))}
         </Routes>
     );

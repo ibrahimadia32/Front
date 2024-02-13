@@ -21,10 +21,7 @@ const styles = {
   section: {
     marginTop: 20,
     
-  },
-
-  
-
+  },  
 };
 
 const ProfilePage = () => {

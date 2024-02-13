@@ -132,8 +132,8 @@ const AddFormation = ({ defaultFormations = [] }: Props) => {
                         <TableRow key={index}>
                             <TableCell>{formation.degree}</TableCell>
                             <TableCell>{formation.school}</TableCell>
-                            <TableCell>{formation.duration && formation.duration.from.getFullYear()}</TableCell>
-                            <TableCell>{formation.duration && formation.duration.to.getFullYear()}</TableCell>
+                            <TableCell>{formation.duration && formation.duration.from?.getFullYear()}</TableCell>
+                            <TableCell>{formation.duration && formation.duration.to?.getFullYear()}</TableCell>
                             <TableCell>
                                 <IconButton>
                                     <Delete />

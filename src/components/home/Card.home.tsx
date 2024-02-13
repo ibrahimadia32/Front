@@ -19,7 +19,7 @@ export default function ActionAreaCard({person}: Props) {
     }}>
       <CardActionArea
         component={"a"}
-        href={`/profil/${person._id}`}
+        href={`/dashboard/profil/${person._id}`}
       >
         <CardMedia
           component="img"

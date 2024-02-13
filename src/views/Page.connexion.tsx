@@ -55,6 +55,11 @@ const Connexion = () => {
             },
           }
         }>Connexion</Button>
+        <h6 style={{
+          textAlign: 'center',
+          marginTop: '20px',
+        }}>Pas encore de compte ? <a href="/inscription">Inscrivez-vous</a>
+        </h6>
       </div>
     </Box>
   );

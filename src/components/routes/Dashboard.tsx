@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate, Outlet } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Avatar } from '@mui/material';
 import { blueGrey } from '@mui/material/colors';
 
+
 const links = [
-    { title: 'Home', path: '/home' },
-    { title: 'edit', path: '/edit' },
-    // { title: 'settings', path: '/settings' },
+    { title: 'Home', path: '/dashboard/home' },
+    { title: 'edit', path: '/dashboard/edit' },
 ];
 
-const Navbar = () => {
+const Dashboard = () => {
+
+    if (localStorage.getItem('token')) {
     return (
+        <>
         <AppBar
             position="static"
             sx={{
@@ -28,7 +31,16 @@ const Navbar = () => {
                 <Avatar></Avatar>
             </Toolbar>
         </AppBar>
+        <Outlet />
+        </>
     );
+    }
+    
+    else {
+        return (
+            <Navigate to="/connexion" replace={true} />
+        );
+    }
 };
 
-export default Navbar;
+export default Dashboard;

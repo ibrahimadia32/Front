@@ -180,6 +180,12 @@ const Inscription = () => {
         }
         onClick={sendRequest}
         >Inscription</Button>
+
+        <h6 style={{
+          textAlign: 'center',
+          marginBottom: '20px',
+        }}>Déjà un compte ? <a href="/connexion">Connectez-vous</a>
+        </h6>
       </div>
     </Box>
   );

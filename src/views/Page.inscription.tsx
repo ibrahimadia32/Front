@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, FormControl, OutlinedInput, FormHelperText, Button, TextField } from '@mui/material';
 import { useEffect } from 'react';
 import Requestapi from '../services/Requestapi';
+import AlertMessage from '../components/message/Alert.message';
+import { Navigate } from 'react-router-dom';
 
 interface inscriptionInput { 
   label : string;
@@ -36,8 +38,16 @@ const Inscription = () => {
     entreprise : "",
   });
 
+  const [alert, setAlert] = React.useState<boolean>(false);
+
   const sendRequest = async () => {
-    Requestapi.signin(inscriptionForm.prenom, inscriptionForm.nom, inscriptionForm.email, inscriptionForm.password, inscriptionForm.telephone, inscriptionForm.entreprise);
+    Requestapi.signup(inscriptionForm.prenom, inscriptionForm.nom, inscriptionForm.email, inscriptionForm.password, inscriptionForm.telephone, inscriptionForm.entreprise)
+    .then((response) => {
+      localStorage.setItem('token', response.data.token);
+    }).catch((error) => {
+      setAlert(true);
+    });
+
   };
   const inscriptionInputs : inscriptionInput[] = [
     {
@@ -109,6 +119,7 @@ const Inscription = () => {
 
 
   return (
+    <>
     <Box
       style={{
         display: 'flex',
@@ -188,6 +199,14 @@ const Inscription = () => {
         </h6>
       </div>
     </Box>
+        {
+localStorage.getItem('token') ? <Navigate to="/dashboard" /> : null        }
+    <AlertMessage
+    message="Erreur lors de l'inscription."
+    open={alert}
+    severity="error"
+  />
+  </>
   );
 };
 

@@ -1,7 +1,7 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Avatar, Menu } from '@mui/material';
 import { blueGrey } from '@mui/material/colors';
-
+import { useState } from 'react';
 
 const links = [
     { title: 'Home', path: '/dashboard/home' },
@@ -9,6 +9,10 @@ const links = [
 ];
 
 const Dashboard = () => {
+    const token = localStorage.getItem('token');
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+
 
     if (localStorage.getItem('token')) {
     return (
@@ -28,8 +32,33 @@ const Dashboard = () => {
                         {item.title}
                     </Button>
                 ))}
-                <Avatar></Avatar>
+                <Avatar
+                    onClick={(event) => {
+                        setAnchorEl(event.currentTarget);
+                    }}
+                ></Avatar>
             </Toolbar>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={() => {
+                    setAnchorEl(null);
+                }}
+                
+            >
+                <Link to="/connexion" style={{ textDecoration: 'none', color: 'black' }}>
+                    <Button
+                        color="inherit"
+                        onClick={() => {
+                            localStorage.removeItem('token');
+                        }}
+                    >
+                        Deconnexion
+                    </Button>
+                </Link>
+            </Menu>
+
         </AppBar>
         <Outlet />
         </>

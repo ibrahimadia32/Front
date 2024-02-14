@@ -6,6 +6,7 @@ export default class Requestapi {
         const response = await axios.get(`${url}/profil`, {
             headers: {
                 'Content-Type': 'application/json',
+                "authorization" : `Bearer ${localStorage.getItem('token')}`
             },
         });
         return response;
@@ -22,11 +23,12 @@ export default class Requestapi {
                 headers: {
                     'Content-Type': 'application/json',
                 },
+
             }
         );
         return response;
     };
-    static signin = async (
+    static signup = async (
         firstname: string,
         lastname: string,
         email: string,

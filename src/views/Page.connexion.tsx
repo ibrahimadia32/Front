@@ -1,8 +1,67 @@
 import React from 'react';
 import { Box, FormControl, OutlinedInput, FormHelperText, Button } from '@mui/material';
+import Requestapi from '../services/Requestapi';
+import AlertMessage from '../components/message/Alert.message';
+import { Navigate, redirect } from 'react-router-dom';
+
+interface connexionInput {
+  label : string;
+  grid?: boolean;
+  placeholder : string;
+  type : string;
+  value : any;
+  onChange : any;
+  required : boolean;
+}
+
+interface connexionForm {
+  username : string;
+  password : string;
+}
+
 
 const Connexion = () => {
+  const [connexionForm, setConnexionForm] = React.useState<connexionForm>({
+    username : "",
+    password : "",
+  });
+
+  const [alert, setAlert] = React.useState<boolean>(false);
+
+  console.log(connexionForm);
+
+  const sendRequest = async () => {
+    Requestapi.login(connexionForm.username, connexionForm.password)
+    .then((response) => {
+      localStorage.setItem('token', response.data.token);
+    }).catch((error) => {
+      setAlert(true);
+    });
+
+  };
+  const connexionInputs : connexionInput[] = [
+    {
+      label : "Username",
+      placeholder : "Username",
+      grid : true,
+      type : "text",
+      value : connexionForm.username,
+      onChange : (e : any) => setConnexionForm({...connexionForm, username : e.target.value}),
+      required : true,
+    },
+    {
+      label : "Password",
+      placeholder : "Password",
+      grid : true,
+      type : "password",
+      value : connexionForm.password,
+      onChange : (e : any) => setConnexionForm({...connexionForm, password : e.target.value}),
+      required : true,
+    },
+  ];
+
   return (
+    <>
     <Box
       style={{
         display: 'flex',
@@ -34,13 +93,28 @@ const Connexion = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <FormControl style={{ width: '25ch', marginBottom: 2, padding: 10 }}>
-            <OutlinedInput placeholder="Username" />
-          </FormControl>
-    
-          <FormControl style={{ width: '25ch', marginBottom: 2, padding: 20  }}>
-            <OutlinedInput type="password" placeholder="Password" />
-          </FormControl>
+          {connexionInputs.map((input, index) => {
+            return (
+              <FormControl
+                key={index}
+                style={{
+                  marginBottom: '20px',
+                }}
+                fullWidth={input.grid}
+                variant="outlined"
+              >
+                <OutlinedInput
+                  id="component-outlined"
+                  type={input.type}
+                  value={input.value}
+                  onChange={input.onChange}
+                  placeholder={input.placeholder}
+                  required={input.required}
+                />
+                <FormHelperText id="my-helper-text">{input.label}</FormHelperText>
+              </FormControl>
+            );
+          })}
         </form>
         <Button variant="contained" sx={
           {
@@ -54,7 +128,9 @@ const Connexion = () => {
               backgroundColor: '#2E3B55',
             },
           }
-        }>Connexion</Button>
+        }
+        onClick={sendRequest}
+        >Connexion</Button>
         <h6 style={{
           textAlign: 'center',
           marginTop: '20px',
@@ -62,6 +138,17 @@ const Connexion = () => {
         </h6>
       </div>
     </Box>
+    {
+      localStorage.getItem('token') ? <Navigate to="/dashboard" /> : null
+    }
+
+    <AlertMessage
+      message="Erreur lors de la connexion."
+      open={alert}
+      severity="error"
+    />
+    
+    </>
   );
 };
 

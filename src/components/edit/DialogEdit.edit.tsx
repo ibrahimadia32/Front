@@ -14,10 +14,12 @@ import {
     SelectChangeEvent,
 } from '@mui/material';
 import { useState, useEffect } from 'react';
-import { Domaine, Formation, Person } from '../interface/Interface.Profil';
+import { Domaine, Experience, Formation, Person } from '../interface/Interface.Profil';
 import Requestapi from '../../services/Requestapi';
 import { Domain } from '@mui/icons-material';
-import AddFormation from './dialog/AddFormation';
+import AddFormations from './dialog/AddFormations';
+import AddExperiences from './dialog/AddExperiences';
+import AddSkills from './dialog/AddSkills';
 
 interface Props {
     open: boolean;
@@ -60,12 +62,19 @@ interface PersonInput {
 
 const EditDailog = ({ open, handleClose, person }: Props) => {
     const [personState, setPersonState] = useState<Person>(person);
-    const [domaines, setDomaines] = useState<Domaine[]>([]);
-    useEffect(() => {
-        Requestapi.getalldomaine().then((res) => {
-            setDomaines(res.data);
-        });
-    }, []);
+
+    const handleSkills = (skills: Domaine[]) => {
+        setPersonState({ ...person, domaines: skills });
+    };
+
+    const handleExperiences = (experiences: Experience[]) => {
+        setPersonState({ ...person, experiences: experiences });
+    };
+
+    const handleFormations = (formations: Formation[]) => {
+        setPersonState({ ...person, formations: formations });
+    };
+
     const personInput: PersonInput[] = [
         {
             name: 'lastname',
@@ -104,10 +113,6 @@ const EditDailog = ({ open, handleClose, person }: Props) => {
         },
     ];
 
-    const handleFormations = (formations: Formation[]) => {
-        setPersonState({ ...person, formations: formations });
-    };
-
     return (
         <Dialog open={open} sx={{ '& .MuiDialog-paper': { width: '80%' } }} onClose={handleClose}>
             <DialogTitle>{'Edition :'}</DialogTitle>
@@ -126,8 +131,26 @@ const EditDailog = ({ open, handleClose, person }: Props) => {
                         </ListItem>
                     ))}
                     <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <AddFormation defaultFormations={personState.formations} returnFormations={handleFormations} />
+                        <AddSkills defaultSkills={personState.domaines} handleSkills={handleSkills} />
                     </ListItem>
+
+                    <ListItem>
+                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                            <AddFormations
+                                defaultFormations={personState.formations}
+                                handleFormations={handleFormations}
+                            />
+                        </Box>
+                    </ListItem>
+                    <ListItem>
+                        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                            <AddExperiences
+                                defaultExperiences={personState.experiences}
+                                handleExperiences={handleExperiences}
+                            />
+                        </Box>
+                    </ListItem>
+                    <ListItem></ListItem>
                 </List>
             </DialogContent>
             <DialogActions
@@ -136,7 +159,12 @@ const EditDailog = ({ open, handleClose, person }: Props) => {
                     justifyContent: 'space-center',
                 }}>
                 <Button onClick={handleClose}>Annuler</Button>
-                <Button onClick={handleClose}>Enregistrer</Button>
+                <Button
+                    onClick={() => {
+                        handleClose();
+                    }}>
+                    Enregistrer
+                </Button>
             </DialogActions>
         </Dialog>
     );

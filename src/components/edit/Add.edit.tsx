@@ -1,4 +1,4 @@
-import { Close } from '@mui/icons-material';
+import { Add, Close } from '@mui/icons-material';
 import {
     AppBar,
     Dialog,
@@ -12,10 +12,13 @@ import {
     ListItem,
 } from '@mui/material';
 import { blueGrey } from '@mui/material/colors';
-import { Person } from '../interface/Interface.Profil';
+import { Domaine, Experience, Formation, Person } from '../interface/Interface.Profil';
 import Requestapi from '../../services/Requestapi';
 
 import { useState, useEffect } from 'react';
+import AddFormation from './dialog/AddFormations';
+import AddExperiences from './dialog/AddExperiences';
+import AddSkills from './dialog/AddSkills';
 
 interface AddEditProps {
     open: boolean;
@@ -120,8 +123,7 @@ const AddEdit = ({ open, handleClose }: AddEditProps) => {
                 sx={{
                     backgroundColor: blueGrey[900],
                 }}
-                position="static"
-            >
+                position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                         <Close />
@@ -152,10 +154,22 @@ const AddEdit = ({ open, handleClose }: AddEditProps) => {
                         fullWidth
                     />
                 ))}
+                <AddSkills
+                    handleSkills={(skills: Domaine[]) => {
+                        setProfil({ ...profil, domaines: skills });
+                    }}
+                />
+                <AddFormation
+                    handleFormations={(formations: Formation[]) => {
+                        setProfil({ ...profil, formations: formations });
+                    }}
+                />
 
-                <Typography variant="h6" component="div">
-                    Formation :
-                </Typography>
+                <AddExperiences
+                    handleExperiences={(experiences: Experience[]) => {
+                        setProfil({ ...profil, experiences: experiences });
+                    }}
+                />
             </DialogContent>
         </Dialog>
     );

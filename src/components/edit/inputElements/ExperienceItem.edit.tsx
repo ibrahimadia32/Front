@@ -11,6 +11,7 @@ const ExperienceItem = ({ experience }: Props) => {
     return (
         <ListItem>
             <Typography variant="subtitle1">{experience.company}</Typography>
+            <Typography variant="subtitle2">{experience.position}</Typography>
         </ListItem>
     );
 };

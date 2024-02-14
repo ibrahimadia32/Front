@@ -37,5 +37,3 @@ export interface Person {
     formations: Formation[];
     domaines: Domaine[];
 }
-
-
